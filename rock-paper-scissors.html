@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Function library example</title>
+</head>
+
+  <script>
+
+    let playerCounter = 0;
+    let computerCounter = 0;
+    let draw = 0;
+
+    let computerOptions = [ "rock","paper", "scissors"];
+
+    function game() {
+      for (let i=0; i<3;i++){
+        let playerSelection = prompt("Please enter your choice", "").toLowerCase();
+        let computerSelection = computerPlay();
+        console.log(`Your choice is: ${playerSelection}`);
+        console.log(`Computer's choice is: ${computerSelection}`);
+        console.log(playRound(playerSelection, computerSelection));
+
+        let storeResult = playRound(playerSelection, computerSelection);
+        if(storeResult.valueOf() == "You Lose!"){
+          computerCounter++;
+          console.log(`Computer counter: ${computerCounter}`);
+        }else if(storeResult.valueOf() == "You Win!"){
+          playerCounter++;
+          console.log(`Player counter: ${playerCounter}`);
+        }else{
+          draw++;
+          console.log(`Draw counter: ${draw}`);
+        }     
+    }
+    counters();
+  }
+
+
+  
+  function computerPlay() {
+      return computerOptions[Math.floor(Math.random() * computerOptions.length)];
+    }
+
+    function playRound(player, computer) {
+
+      if(player =="rock" && computer == "paper" || player =="paper" && computer == "scissors" || player =="scissors" && computer == "rock") {
+        return "You Lose!";
+      }else if(player.valueOf() == computer.valueOf()){
+        return "It's a draw!";
+      }else{
+        return "You Win!";
+      }
+    }
+
+    function counters() {
+      if(computerCounter > playerCounter) {
+          console.log(`You lose against the computer with: ${playerCounter} - ${computerCounter}`);
+        }else if(computerCounter == playerCounter){
+          console.log(`It's a draw. You won ${playerCounter} times and the compter won ${computerCounter} times`);
+        }
+        else{
+          console.log(`You win against the computer with: ${playerCounter} - ${computerCounter}`);
+        }
+    }
+    
+    game();
+
+  </script>
+</body>
+</html>
